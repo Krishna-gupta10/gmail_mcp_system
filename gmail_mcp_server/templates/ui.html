@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email MCP UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            margin: 5px 0;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Gmail MCP Server UI</h2>
+
+    <div class="section">
+        <button onclick="fetchEmails()">Fetch Latest Emails</button>
+        <table id="emailTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>From</th>
+                    <th>Subject</th>
+                    <th>Snippet</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <button onclick="fetchCategorizedEmails()">View Categorized Emails</button>
+        <table id="categorizedTable">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+<script>
+    function fetchEmails() {
+        fetch('/fetch-emails?days=7&max_results=50')
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.querySelector("#emailTable tbody");
+                tbody.innerHTML = "";
+                data.forEach(email => {
+                    const row = `
+                        <tr>
+                            <td>${email.date}</td>
+                            <td>${email.from}</td>
+                            <td>${email.subject}</td>
+                            <td>${email.snippet}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            })
+            .catch(err => console.error(err));
+    }
+
+    function fetchCategorizedEmails() {
+        fetch('/categorized-emails')
+            .then(res => res.json())
+            .then(data => {
+                const tbody = document.querySelector("#categorizedTable tbody");
+                tbody.innerHTML = "";
+                data.forEach(email => {
+                    const row = `
+                        <tr>
+                            <td>${email.subject}</td>
+                            <td>${email.category}</td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            })
+            .catch(err => console.error(err));
+    }
+</script>
+
+</body>
+</html>

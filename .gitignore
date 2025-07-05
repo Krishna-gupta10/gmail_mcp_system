@@ -1,0 +1,5 @@
+gmail_mcp_server/credentials.json
+gmail_mcp_server/token.json
+email_agent/.env
+sample_mcp_logs.jsonl
+prompt_log.md
