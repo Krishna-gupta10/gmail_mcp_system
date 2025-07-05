@@ -5,7 +5,7 @@
 
 ## ⚙️ Setup Instructions
 
-### sInstall Dependencies
+### Install Dependencies
 
 Make sure you have Python 3.9 or higher installed. Then, install the required dependencies:
 
