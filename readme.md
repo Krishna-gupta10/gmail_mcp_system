@@ -5,7 +5,7 @@
 
 ## ⚙️ Setup Instructions
 
-### 1️⃣ Install Dependencies
+### sInstall Dependencies
 
 Make sure you have Python 3.9 or higher installed. Then, install the required dependencies:
 
@@ -34,11 +34,11 @@ cd gmail_mcp_server
 uvicorn main:app --reload
 ```
 
-### 3️⃣ Running the Email Categorization Agent
+### Running the Email Categorization Agent
 ```bash
 cd email_agent  
 python call_gmail_api.py  
 ```
 
-### 4️⃣ Accessing the MCP Server
+### Accessing the MCP Server
 Open your browser and navigate to http://localhost:8000/view. You should see the UI where you can log emails and view the logs.
